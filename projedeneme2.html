@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kelime Oyunları</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+      color: #333;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 20px 0;
+      font-size: 2em;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .game-options {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .game-card {
+      background: #fff;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+
+    .game-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .game-card h2 {
+      margin: 0 0 10px 0;
+      font-size: 1.5em;
+    }
+
+    .game-card p {
+      font-size: 1em;
+      color: #666;
+    }
+
+    #game-container {
+      display: none;
+      margin-top: 20px;
+    }
+
+    #timer, #score {
+      font-size: 18px;
+      margin-top: 10px;
+    }
+
+    button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #4caf50;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <h1>Kelime Oyunları</h1>
+  <div class="container">
+    <div id="game-selection" class="game-options">
+      <div class="game-card" onclick="startGame(1)">
+        <h2>Karışık Harflerle Kelime Bul</h2>
+        <p>Harfleri karışık verilen kelimenin doğru yazılışını bulun.</p>
+      </div>
+      <div class="game-card" onclick="startGame(2)">
+        <h2>Anlamına Göre Kelime Bul</h2>
+        <p>Anlamı verilen kelimeyi doğru tahmin edin.</p>
+      </div>
+      <div class="game-card" onclick="startGame(3)">
+        <h2>Zıt Anlamlı Kelime Bul</h2>
+        <p>Zıt anlamlı kelimeyi doğru tahmin edin.</p>
+      </div>
+      <div class="game-card" onclick="startGame(4)">
+        <h2>Son Harf ile Devam</h2>
+        <p>Verilen kelimenin son harfiyle yeni bir kelime bulun.</p>
+      </div>
+    </div>
+    <div id="game-container">
+      <h2 id="game-title"></h2>
+      <p id="game-instructions"></p>
+      <div id="scrambled-word" style="font-size: 24px; font-weight: bold;"></div>
+      <input type="text" id="user-input" placeholder="Tahmininizi yazın">
+      <button onclick="checkAnswer()">Kontrol Et</button>
+      <p id="timer">Süre: 30</p>
+      <p id="score">Puan: 0</p>
+      <p id="result"></p>
+    </div>
+  </div>
+
+  <script>
+    const games = [
+      {
+        id: 1,
+        title: "Karışık Harflerle Kelime Bul",
+        instructions: "Harfleri karışık verilen kelimenin doğru yazılışını bulun.",
+        words: ["javascript", "bilgisayar", "programlama", "tasarım", "kelime"],
+        shuffle: true
+      },
+      {
+        id: 2,
+        title: "Anlamına Göre Kelime Bul",
+        instructions: "Anlamı verilen kelimeyi doğru tahmin edin.",
+        words: [
+          { question: "Bir yazılım dili.", answer: "javascript" },
+          { question: "Hesaplama cihazı.", answer: "bilgisayar" }
+        ],
+        shuffle: false
+      },
+      {
+        id: 3,
+        title: "Zıt Anlamlı Kelime Bul",
+        instructions: "Zıt anlamlı kelimeyi doğru tahmin edin.",
+        words: [
+          { question: "Uzun", answer: "kısa" },
+          { question: "Büyük", answer: "küçük" }
+        ],
+        shuffle: false
+      },
+      {
+        id: 4,
+        title: "Son Harf ile Devam",
+        instructions: "Verilen kelimenin son harfiyle yeni bir kelime bulun.",
+        words: ["tasarım", "kelime", "program"],
+        shuffle: false
+      }
+    ];
+
+    let currentGame = null;
+    let score = 0;
+    let timeLeft = 30;
+    let timer;
+
+    function startGame(gameId) {
+      const selectedGame = games.find(game => game.id === gameId);
+      currentGame = selectedGame;
+      document.getElementById("game-selection").style.display = "none";
+      document.getElementById("game-container").style.display = "block";
+      document.getElementById("game-title").textContent = selectedGame.title;
+      document.getElementById("game-instructions").textContent = selectedGame.instructions;
+      score = 0;
+      timeLeft = 30;
+      document.getElementById("score").textContent = "Puan: 0";
+      document.getElementById("timer").textContent = "Süre: 30";
+      startTimer();
+      loadQuestion();
+    }
+
+    function startTimer() {
+      timer = setInterval(() => {
+        timeLeft--;
+        document.getElementById("timer").textContent = `Süre: ${timeLeft}`;
+        if (timeLeft <= 0) {
+          clearInterval(timer);
+          endGame();
+        }
+      }, 1000);
+    }
+
+    function loadQuestion() {
+      if (currentGame.shuffle) {
+        const word = currentGame.words[Math.floor(Math.random() * currentGame.words.length)];
+        const scrambled = word.split("").sort(() => Math.random() - 0.5).join("");
+        document.getElementById("scrambled-word").textContent = scrambled;
+      } else {
+        const randomItem = currentGame.words[Math.floor(Math.random() * currentGame.words.length)];
+        document.getElementById("scrambled-word").textContent = randomItem.question;
+        currentGame.currentAnswer = randomItem.answer;
+      }
+    }
+
+    function checkAnswer() {
+      const userAnswer = document.getElementById("user-input").value.toLowerCase();
+      if (currentGame.shuffle) {
+        const correctAnswer = currentGame.words.find(word =>
+          word.split("").sort().join("") === userAnswer.split("").sort().join("")
+        );
+        if (correctAnswer) {
+          score += 10;
+        }
+      } else {
+        if (userAnswer === currentGame.currentAnswer) {
+          score += 10;
+        }
+      }
+      document.getElementById("score").textContent = `Puan: ${score}`;
+      loadQuestion();
+    }
+
+    function endGame() {
+      alert(`Oyun Bitti! Toplam Puanınız: ${score}`);
+      location.reload();
+    }
+  </script>
+</body>
+</html>
+
+
+
