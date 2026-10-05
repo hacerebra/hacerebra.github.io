@@ -1,35 +1,632 @@
+```html
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kişisel Bilgiler</title>
+
+    <title>Hacer Ebra Özdemir | Portfolio</title>
+
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
-        .info {
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f7fb;
+            color: #222;
+            line-height: 1.6;
+        }
+
+        /* HEADER */
+
+        header {
+            background: linear-gradient(135deg, #1f2937, #374151);
+            color: white;
+            text-align: center;
+            padding: 80px 20px;
+        }
+
+        header h1 {
+            font-size: 42px;
             margin-bottom: 10px;
         }
-        a {
-            color: blue;
-            text-decoration: none;
+
+        header p {
+            font-size: 19px;
+            color: #d1d5db;
         }
-        a:hover {
-            text-decoration: underline;
+
+        .github-button {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 12px 24px;
+            background: white;
+            color: #1f2937;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .github-button:hover {
+            transform: translateY(-2px);
+            background: #e5e7eb;
+        }
+
+        /* GENERAL */
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        section {
+            padding: 60px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 30px;
+            margin-bottom: 35px;
+            color: #1f2937;
+        }
+
+        /* ABOUT */
+
+        .about {
+            background: white;
+        }
+
+        .personal-info {
+            max-width: 650px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .info-box {
+            background: #f5f7fb;
+            padding: 18px;
+            border-radius: 10px;
+            border-left: 4px solid #374151;
+        }
+
+        .info-box strong {
+            display: block;
+            color: #374151;
+            margin-bottom: 4px;
+        }
+
+        /* PROJECTS */
+
+        .projects {
+            background: #f5f7fb;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 14px;
+            padding: 28px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.07);
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .project-icon {
+            font-size: 35px;
+            margin-bottom: 15px;
+        }
+
+        .project-card h3 {
+            font-size: 21px;
+            margin-bottom: 10px;
+            color: #1f2937;
+        }
+
+        .project-card p {
+            color: #666;
+            font-size: 15px;
+            margin-bottom: 15px;
+        }
+
+        .technologies {
+            margin-top: auto;
+            margin-bottom: 20px;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #eef2f7;
+            color: #374151;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin: 3px;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .project-links a {
+            display: inline-block;
+            padding: 9px 15px;
+            background: #374151;
+            color: white;
+            text-decoration: none;
+            border-radius: 7px;
+            font-size: 13px;
+            transition: 0.3s;
+        }
+
+        .project-links a:hover {
+            background: #111827;
+        }
+
+        /* GITHUB */
+
+        .github-section {
+            background: white;
+            text-align: center;
+        }
+
+        .github-section p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        /* FOOTER */
+
+        footer {
+            background: #1f2937;
+            color: #d1d5db;
+            text-align: center;
+            padding: 25px;
+            font-size: 14px;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 600px) {
+
+            header h1 {
+                font-size: 32px;
+            }
+
+            header p {
+                font-size: 16px;
+            }
+
+            .personal-info {
+                grid-template-columns: 1fr;
+            }
+
+            section {
+                padding: 45px 0;
+            }
         }
     </style>
 </head>
+
 <body>
-    <h1>Kişisel Bilgilerim</h1>
-    <div class="info">İsim: <strong>Hacer Ebra</strong></div>
-    <div class="info">Soyisim: <strong>Özdemir</strong></div>
-    <div class="info">Bölüm: <strong>Bilgisayar Mühendisliği</strong></div>
-    <div class="info">Numara: <strong>2121221045</strong></div>
-    <div class="info">
-        Proje Dosyalarım: 
-        <a href="Ileri_Prog/index.html" target="_blank">İleri Programlama Projesi</a>
-    </div>
+
+    <!-- HEADER -->
+
+    <header>
+        <div class="container">
+
+            <h1>Hacer Ebra Özdemir</h1>
+
+            <p>Bilgisayar Mühendisi | Yazılım Geliştirme | Makine Öğrenmesi</p>
+
+            <a
+                class="github-button"
+                href="https://github.com/hacerebra"
+                target="_blank">
+                GitHub Profilim
+            </a>
+
+        </div>
+    </header>
+
+
+    <!-- PERSONAL INFORMATION -->
+
+    <section class="about">
+
+        <div class="container">
+
+            <h2 class="section-title">Kişisel Bilgilerim</h2>
+
+            <div class="personal-info">
+
+                <div class="info-box">
+                    <strong>İsim</strong>
+                    Hacer Ebra
+                </div>
+
+                <div class="info-box">
+                    <strong>Soyisim</strong>
+                    Özdemir
+                </div>
+
+                <div class="info-box">
+                    <strong>Bölüm</strong>
+                    Bilgisayar Mühendisliği
+                </div>
+
+                <div class="info-box">
+                    <strong>Öğrenci Numarası</strong>
+                    2121221045
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- PROJECTS -->
+
+    <section class="projects">
+
+        <div class="container">
+
+            <h2 class="section-title">Projelerim</h2>
+
+            <div class="project-grid">
+
+
+                <!-- SDN IDS -->
+
+                <div class="project-card">
+
+                    <div class="project-icon">🛡️</div>
+
+                    <h3>SDN Tabanlı Saldırı Tespit Sistemi</h3>
+
+                    <p>
+                        Yazılım Tanımlı Ağlar üzerinde makine öğrenmesi
+                        kullanılarak ağ saldırılarının tespit edilmesini
+                        amaçlayan bitirme projesi.
+                    </p>
+
+                    <div class="technologies">
+                        <span class="tag">Python</span>
+                        <span class="tag">Machine Learning</span>
+                        <span class="tag">XGBoost</span>
+                        <span class="tag">Ryu</span>
+                        <span class="tag">Mininet</span>
+                    </div>
+
+                    <div class="project-links">
+                        <a href="https://github.com/hacerebra"
+                           target="_blank">
+                            GitHub
+                        </a>
+                    </div>
+
+                </div>
+
+
+                <!-- LIBROSH -->
+
+                <div class="project-card">
+
+                    <div class="project-icon">📚</div>
+
+                    <h3>Librosh</h3>
+
+                    <p>
+                        Kullanıcıların kitap arayabileceği, kitaplarını
+                        yönetebileceği ve favorilerine ekleyebileceği
+                        web tabanlı kitap yönetim uygulaması.
+                    </p>
+
+                    <div class="technologies">
+                        <span class="tag">HTML</span>
+                        <span class="tag">CSS</span>
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">OpenLibrary API</span>
+                        <span class="tag">LocalStorage</span>
+                    </div>
+
+                    <div class="project-links">
+
+                        <a href="https://github.com/hacerebra/Librosh"
+                           target="_blank">
+                            GitHub
+                        </a>
+
+                        <a href="https://hacerebra.github.io/Librosh/"
+                           target="_blank">
+                            Canlı Demo
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <!-- OTHELLO -->
+
+                <div class="project-card">
+
+                    <div class="project-icon">🎮</div>
+
+                    <h3>Othello Game</h3>
+
+                    <p>
+                        Java Swing kullanılarak geliştirilen,
+                        kullanıcıların Othello oynayabildiği masaüstü
+                        oyun uygulaması.
+                    </p>
+
+                    <div class="technologies">
+                        <span class="tag">Java</span>
+                        <span class="tag">Swing</span>
+                    </div>
+
+                    <div class="project-links">
+
+                        <a href="https://github.com/hacerebra/Othello_Game"
+                           target="_blank">
+                            GitHub
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <!-- JAVA GAME -->
+
+                <div class="project-card">
+
+                    <div class="project-icon">🎮</div>
+
+                    <h3>Java Oyun Projesi</h3>
+
+                    <p>
+                        Java programlama dili kullanılarak geliştirilen
+                        oyun projesi.
+                    </p>
+
+                    <div class="technologies">
+                        <span class="tag">Java</span>
+                    </div>
+
+                    <div class="project-links">
+
+                        <a href="https://github.com/hacerebra/JavaOyun"
+                           target="_blank">
+                            GitHub
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <!-- STUDENT TRACKING -->
+
+                <div class="project-card">
+
+                    <div class="project-icon">🎓</div>
+
+                    <h3>Öğrenci Takip Sistemi</h3>
+
+                    <p>
+                        Öğrenci ve ders bilgilerinin tutulduğu,
+                        dosya işlemleri ve not hesaplama özellikleri
+                        içeren öğrenci takip programı.
+                    </p>
+
+                    <div class="technologies">
+                        <span class="tag">C</span>
+                        <span class="tag">File I/O</span>
+                    </div>
+
+                    <div class="project-links">
+
+                        <a href="https://github.com/hacerebra/OgrenciTakip"
+                           target="_blank">
+                            GitHub
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <!-- COMPLEX NUMBERS -->
+
+                <div class="project-card">
+
+                    <div class="project-icon">🔢</div>
+
+                    <h3>Complex Numbers</h3>
+
+                    <p>
+                        Karmaşık sayılar üzerinde aritmetik işlemler
+                        gerçekleştiren ve Vector/Matrix yapıları
+                        üzerinde çalışan C++ projesi.
+                    </p>
+
+                    <div class="technologies">
+                        <span class="tag">C++</span>
+                        <span class="tag">Vector</span>
+                        <span class="tag">Matrix</span>
+                    </div>
+
+                    <div class="project-links">
+
+                        <a href="https://github.com/hacerebra/Complex_Numbers"
+                           target="_blank">
+                            GitHub
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <!-- PERSONEL -->
+
+                <div class="project-card">
+
+                    <div class="project-icon">👥</div>
+
+                    <h3>Personel Takip Sistemi</h3>
+
+                    <p>
+                        Java kullanılarak geliştirilen, kullanıcı kayıt
+                        ve giriş işlemlerini destekleyen personel takip
+                        sistemi.
+                    </p>
+
+                    <div class="technologies">
+                        <span class="tag">Java</span>
+                        <span class="tag">GUI</span>
+                    </div>
+
+                    <div class="project-links">
+
+                        <a href="https://github.com/hacerebra/PersonelTakipSistemi"
+                           target="_blank">
+                            GitHub
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <!-- TOMBALA -->
+
+                <div class="project-card">
+
+                    <div class="project-icon">🎱</div>
+
+                    <h3>Tombala Game</h3>
+
+                    <p>
+                        Veri yapıları kullanılarak geliştirilen,
+                        Doubly Linked List yapısını kullanan Tombala
+                        oyun uygulaması.
+                    </p>
+
+                    <div class="technologies">
+                        <span class="tag">Java</span>
+                        <span class="tag">Doubly Linked List</span>
+                    </div>
+
+                    <div class="project-links">
+
+                        <a href="https://github.com/hacerebra/TombalaGame"
+                           target="_blank">
+                            GitHub
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ADVANCED PROGRAMMING -->
+
+                <div class="project-card">
+
+                    <div class="project-icon">💻</div>
+
+                    <h3>İleri Programlama Projesi</h3>
+
+                    <p>
+                        İleri programlama dersi kapsamında geliştirilen
+                        proje.
+                    </p>
+
+                    <div class="technologies">
+                        <span class="tag">Programming</span>
+                    </div>
+
+                    <div class="project-links">
+
+                        <a href="Ileri_Prog/index.html"
+                           target="_blank">
+                            Projeyi Gör
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- GITHUB -->
+
+    <section class="github-section">
+
+        <div class="container">
+
+            <h2 class="section-title">GitHub</h2>
+
+            <p>
+                Diğer çalışmalarımı ve projelerimi GitHub profilimde
+                inceleyebilirsiniz.
+            </p>
+
+            <a
+                class="github-button"
+                href="https://github.com/hacerebra"
+                target="_blank">
+                GitHub Profiline Git
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        © 2026 Hacer Ebra Özdemir
+
+    </footer>
+
 </body>
 </html>
+```
